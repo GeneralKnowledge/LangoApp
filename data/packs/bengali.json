@@ -1,0 +1,133 @@
+{
+  "languageCode": "bn",
+  "languageName": "Bengali",
+  "version": 1,
+  "phrases": [
+    {
+      "id": "greetings.hello",
+      "module": "GREETINGS",
+      "difficulty": 1,
+      "meaning": {
+        "en": "Hello",
+        "es": "Hola",
+        "fr": "Bonjour"
+      },
+      "say": {
+        "native": "Hello",
+        "romanization": null
+      }
+    },
+    {
+      "id": "politeness.thank_you",
+      "module": "POLITENESS",
+      "difficulty": 1,
+      "meaning": {
+        "en": "Thank you",
+        "es": "Gracias",
+        "fr": "Merci"
+      },
+      "say": {
+        "native": "Thank you",
+        "romanization": null
+      }
+    },
+    {
+      "id": "basics.yes",
+      "module": "BASICS",
+      "difficulty": 1,
+      "meaning": {
+        "en": "Yes",
+        "es": "Sí",
+        "fr": "Oui"
+      },
+      "say": {
+        "native": "Yes",
+        "romanization": null
+      }
+    },
+    {
+      "id": "intro.my_name_is",
+      "module": "INTRO",
+      "difficulty": 1,
+      "meaning": {
+        "en": "My name is...",
+        "es": "Me llamo...",
+        "fr": "Je m'appelle..."
+      },
+      "say": {
+        "native": "My name is...",
+        "romanization": null
+      }
+    },
+    {
+      "id": "numbers.one",
+      "module": "NUMBERS",
+      "difficulty": 1,
+      "meaning": {
+        "en": "One",
+        "es": "Uno",
+        "fr": "Un"
+      },
+      "say": {
+        "native": "One",
+        "romanization": null
+      }
+    },
+    {
+      "id": "food.i_am_hungry",
+      "module": "FOOD",
+      "difficulty": 2,
+      "meaning": {
+        "en": "I am hungry",
+        "es": "Tengo hambre",
+        "fr": "J'ai faim"
+      },
+      "say": {
+        "native": "I am hungry",
+        "romanization": null
+      }
+    },
+    {
+      "id": "directions.where_is",
+      "module": "DIRECTIONS",
+      "difficulty": 2,
+      "meaning": {
+        "en": "Where is the hotel?",
+        "es": "¿Dónde está el hotel?",
+        "fr": "Où est l'hôtel ?"
+      },
+      "say": {
+        "native": "Where is the hotel?",
+        "romanization": null
+      }
+    },
+    {
+      "id": "transport.bus_station",
+      "module": "TRANSPORT",
+      "difficulty": 2,
+      "meaning": {
+        "en": "Bus station",
+        "es": "Estación de autobús",
+        "fr": "Gare routière"
+      },
+      "say": {
+        "native": "Bus station",
+        "romanization": null
+      }
+    },
+    {
+      "id": "emergency.help",
+      "module": "EMERGENCY",
+      "difficulty": 1,
+      "meaning": {
+        "en": "Help!",
+        "es": "¡Ayuda!",
+        "fr": "Au secours !"
+      },
+      "say": {
+        "native": "Help!",
+        "romanization": null
+      }
+    }
+  ]
+}
