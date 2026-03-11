@@ -1,5 +1,5 @@
 import './globals.css';
-import Link from 'next/link';
+import AppShellHeader from '@/components/AppShellHeader';
 
 export const metadata = {
   title: 'Universal Survival Phrasebook',
@@ -11,12 +11,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body>
         <div className="container">
-          <h1>Universal Survival Phrasebook</h1>
-          <div className="nav">
-            <Link href="/learn">Learn</Link>
-            <Link href="/review">Review</Link>
-            <Link href="/settings">Settings</Link>
-          </div>
+          <AppShellHeader />
           {children}
         </div>
       </body>
