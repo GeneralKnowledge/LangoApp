@@ -21,6 +21,15 @@ export default function ReviewPage() {
   const pack = getPack(targetLang);
   const queue = useMemo(() => buildQueue(pack?.phrases ?? [], progress, targetLang, module, 20), [pack, progress, targetLang, module]);
   const current = queue[cursor];
+  const totalSeen = Math.min(cursor, queue.length);
+  const completionPct = queue.length ? Math.round((totalSeen / queue.length) * 100) : 0;
+  const statusCounts = queue.reduce(
+    (acc, item) => {
+      acc[item.status] += 1;
+      return acc;
+    },
+    { NEW: 0, DUE: 0 } as Record<'NEW' | 'DUE', number>
+  );
 
   const onGrade = (grade: Grade) => {
     if (!current) return;
@@ -54,11 +63,13 @@ export default function ReviewPage() {
             </select>
           </div>
         </div>
-        <p className="small">Card {cursor + 1} / {queue.length} · {current.status}</p>
+        <p className="small">Card {cursor + 1} / {queue.length} · {current.status} · {completionPct}% complete</p>
+        <p className="small">New: {statusCounts.NEW} · Due: {statusCounts.DUE}</p>
       </div>
       <PhraseCard phrase={current.phrase} uiLanguage={settings.uiLanguage} />
       <div className="row" style={{ marginBottom: 10 }}>
         <button className="btn btn-muted" onClick={() => speak(current.phrase.say.native, targetLang, settings.slowMode ? 0.75 : settings.speechRate, settings.selectedVoiceByLang[targetLang])}>Play audio</button>
+        <button className="btn btn-muted" onClick={() => setCursor(0)}>Restart queue</button>
       </div>
       <ReviewButtons onGrade={onGrade} />
     </>
