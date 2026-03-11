@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { DEFAULT_SETTINGS, SUPPORTED_LANGUAGES } from '@/lib/constants';
+import { t } from '@/lib/i18n';
 import { saveSettings } from '@/lib/storage';
 
 export default function OnboardingPage() {
@@ -16,17 +17,23 @@ export default function OnboardingPage() {
 
   return (
     <div className="card">
-      <h2>Welcome</h2>
-      <p className="small">No account needed. Your progress stays on this device only.</p>
-      <label>UI language</label>
+      <h2>{t(uiLanguage, 'onboarding.welcome')}</h2>
+      <p className="small">{t(uiLanguage, 'onboarding.subtitle')}</p>
+      <label>{t(uiLanguage, 'onboarding.uiLanguage')}</label>
       <select value={uiLanguage} onChange={(e) => setUiLanguage(e.target.value)}>
         {SUPPORTED_LANGUAGES.map(([code, name]) => <option key={code} value={code}>{name}</option>)}
       </select>
 
-      <label style={{ marginTop: 12 }}>Target language(s)</label>
-      <div className="row">
+      <label style={{ marginTop: 12 }}>{t(uiLanguage, 'onboarding.targetLanguages')}</label>
+      <div className="row" role="group" aria-label={t(uiLanguage, 'onboarding.targetLanguages')}>
         {SUPPORTED_LANGUAGES.filter(([code]) => code !== uiLanguage).map(([code, name]) => (
-          <button key={code} className="btn btn-muted" onClick={() => toggle(code)} style={{ background: targets.includes(code) ? '#bfdbfe' : undefined }}>
+          <button
+            key={code}
+            className="btn btn-muted"
+            onClick={() => toggle(code)}
+            aria-pressed={targets.includes(code)}
+            style={{ background: targets.includes(code) ? '#bfdbfe' : undefined }}
+          >
             {name}
           </button>
         ))}
@@ -40,7 +47,7 @@ export default function OnboardingPage() {
           router.push('/learn');
         }}
       >
-        Start Learning
+        {t(uiLanguage, 'onboarding.start')}
       </button>
     </div>
   );

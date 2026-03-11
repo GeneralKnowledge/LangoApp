@@ -4,6 +4,7 @@ import { useMemo, useState } from 'react';
 import PhraseCard from '@/components/PhraseCard';
 import { getPack } from '@/lib/packs';
 import { MODULES, SUPPORTED_LANGUAGES } from '@/lib/constants';
+import { t } from '@/lib/i18n';
 import { loadFavorites, loadSettings, toggleFavorite } from '@/lib/storage';
 import { speak } from '@/lib/tts';
 
@@ -38,36 +39,38 @@ export default function LearnPage() {
     setFavorites(updated);
   };
 
-  if (!pack) return <p>No pack available for this language yet.</p>;
-  if (!phrase) return <p>No phrases found for this filter. Try turning off favorites or selecting a different module.</p>;
+  if (!pack) return <p>{t(settings.uiLanguage, 'learn.noPack')}</p>;
+  if (!phrase) return <p>{t(settings.uiLanguage, 'learn.noPhrases')}</p>;
 
   const isFavorite = Boolean(favorites[`${targetLang}:${phrase.id}`]);
 
   return (
     <>
       <div className="card">
-        <label>Target language</label>
+        <label>{t(settings.uiLanguage, 'common.targetLanguage')}</label>
         <select value={targetLang} onChange={(e) => { setTargetLang(e.target.value); setIndex(0); }}>
-          {settings.targetLanguages.map((code) => <option key={code} value={code}>{code}</option>)}
+          {settings.targetLanguages.map((code) => (
+            <option key={code} value={code}>{SUPPORTED_LANGUAGES.find(([langCode]) => langCode === code)?.[1] ?? code}</option>
+          ))}
         </select>
-        <label style={{ marginTop: 8 }}>Module filter</label>
+        <label style={{ marginTop: 8 }}>{t(settings.uiLanguage, 'learn.moduleFilter')}</label>
         <select value={module} onChange={(e) => { setModule(e.target.value); setIndex(0); }}>
-          <option value="ALL">All</option>
+          <option value="ALL">{t(settings.uiLanguage, 'common.all')}</option>
           {MODULES.map((m) => <option key={m} value={m}>{m}</option>)}
         </select>
         <div className="row" style={{ marginTop: 10, justifyContent: 'space-between' }}>
-          <span className="small">Learning {languageName} · {index + 1}/{phrases.length}</span>
+          <span className="small">{t(settings.uiLanguage, 'learn.learningProgress').replace('{language}', languageName).replace('{index}', String(index + 1)).replace('{total}', String(phrases.length))}</span>
           <button className="btn btn-muted" onClick={() => { setShowFavoritesOnly((prev) => !prev); setIndex(0); }}>
-            {showFavoritesOnly ? 'Show all cards' : 'Favorites only'}
+            {showFavoritesOnly ? t(settings.uiLanguage, 'learn.showAll') : t(settings.uiLanguage, 'learn.favoritesOnly')}
           </button>
         </div>
       </div>
       <PhraseCard phrase={phrase} uiLanguage={settings.uiLanguage} />
       <div className="row">
-        <button className="btn btn-muted" onClick={() => speak(phrase.say.native, targetLang, settings.slowMode ? 0.75 : settings.speechRate, settings.selectedVoiceByLang[targetLang])}>Play</button>
-        <button className="btn btn-muted" onClick={() => speak(phrase.say.native, targetLang, 0.7, settings.selectedVoiceByLang[targetLang])}>Slow</button>
-        <button className="btn btn-muted" onClick={handleToggleFavorite}>{isFavorite ? '★ Favorited' : '☆ Favorite'}</button>
-        <button className="btn btn-primary" onClick={goToNext}>Next</button>
+        <button className="btn btn-muted" onClick={() => speak(phrase.say.native, targetLang, settings.slowMode ? 0.75 : settings.speechRate, settings.selectedVoiceByLang[targetLang])}>{t(settings.uiLanguage, 'learn.play')}</button>
+        <button className="btn btn-muted" onClick={() => speak(phrase.say.native, targetLang, 0.7, settings.selectedVoiceByLang[targetLang])}>{t(settings.uiLanguage, 'learn.slow')}</button>
+        <button className="btn btn-muted" onClick={handleToggleFavorite}>{isFavorite ? t(settings.uiLanguage, 'learn.favorited') : t(settings.uiLanguage, 'learn.favorite')}</button>
+        <button className="btn btn-primary" onClick={goToNext}>{t(settings.uiLanguage, 'learn.next')}</button>
       </div>
     </>
   );

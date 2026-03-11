@@ -24,12 +24,14 @@ export interface ReviewState {
   intervalDays: number;
   easeFactor: number;
   repetitions: number;
+  lapses: number;
   lastGrade: Grade | null;
   lastReviewedAt?: string;
   isNew: boolean;
 }
 
 export interface AppSettings {
+  schemaVersion: number;
   uiLanguage: string;
   targetLanguages: string[];
   speechRate: number;

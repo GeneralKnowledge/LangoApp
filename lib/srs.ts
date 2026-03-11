@@ -8,6 +8,7 @@ export function createInitialState(phraseId: string, targetLang: string): Review
     intervalDays: 0,
     easeFactor: 2.5,
     repetitions: 0,
+    lapses: 0,
     lastGrade: null,
     isNew: true
   };
@@ -17,6 +18,7 @@ export function applyGrade(state: ReviewState, grade: Grade): ReviewState {
   const next = { ...state, lastGrade: grade, lastReviewedAt: new Date().toISOString(), isNew: false };
   if (grade === 'again') {
     next.repetitions = 0;
+    next.lapses += 1;
     next.intervalDays = 0;
     next.easeFactor = Math.max(1.3, next.easeFactor - 0.2);
   } else if (grade === 'hard') {

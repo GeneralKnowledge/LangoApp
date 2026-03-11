@@ -25,3 +25,7 @@ label { display: block; margin-bottom: 6px; font-weight: 600; }
 .small { color: var(--muted); font-size: 13px; }
 .nav { display: flex; gap: 10px; margin-top: 12px; }
 .nav a { padding: 8px 10px; border-radius: 8px; background: #e5e7eb; }
+button:focus-visible, a:focus-visible, select:focus-visible, input:focus-visible {
+  outline: 3px solid #1d4ed8;
+  outline-offset: 2px;
+}

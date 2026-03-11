@@ -2,7 +2,7 @@ export function speak(text: string, lang: string, rate: number, voiceName?: stri
   if (typeof window === 'undefined' || !('speechSynthesis' in window)) return;
   const utter = new SpeechSynthesisUtterance(text);
   utter.lang = lang;
-  utter.rate = rate;
+  utter.rate = Math.min(1.4, Math.max(0.6, rate));
   if (voiceName) {
     const voice = window.speechSynthesis.getVoices().find((v) => v.name === voiceName);
     if (voice) utter.voice = voice;
